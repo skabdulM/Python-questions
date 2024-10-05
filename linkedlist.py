@@ -38,6 +38,7 @@ class LinkedList:
     def insertAtIndex(self, data, index):
         if index == 0:
             self.insertAtBegining(data)
+            return
 
         position = 0
         current_node = self.head
@@ -57,11 +58,31 @@ class LinkedList:
 
         self.head = self.head.next
 
+    def remove_at_index(self, index):
+        if self.head is None:
+            return
+
+        current_node = self.head
+        position = 0
+
+        if index == 0:
+            self.remove_first_node()
+        else:
+            while current_node != None and position + 1 != index:
+                position += 1
+                current_node = current_node.next
+
+            if current_node is None or current_node.next is None:
+                print("index not present")
+            else:
+                current_node.next = current_node.next.next
+
 
 temp = LinkedList()
 temp.insertAtEnd(45)
 temp.insertAtBegining(26)
 temp.insertAtBegining("3")
 temp.insertAtBegining("2")
-temp.insertAtIndex(90, 0)
+temp.insertAtIndex(90, 1)
+temp.remove_at_index(0)
 temp.printAll()
